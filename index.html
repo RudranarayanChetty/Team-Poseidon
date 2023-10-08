@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fish Search</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Body background image */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://imgur.com/e48beefd-63b4-4e21-a4cf-61fea5d382d1');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        /* Center the container with 60% width and height */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            width: 60%; /* Adjust the width as needed */
+            margin: 0 auto; /* Center horizontally */
+            background-color: rgba(255, 255, 255, 0.8); /* Translucent background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Heading style */
+        .container h3 {
+            color: black;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        /* Styling for the search container */
+        .search-container::before {
+            content: "Aqua Rescue";
+            display: block;
+            background-color: #0077cc;
+            color: #fff;
+            font-size: 36px;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            position: absolute;
+            top: -60px;
+            left: 0;
+            right: 0;
+        }
+
+        .search-container {
+            text-align: center;
+            position: relative;
+        }
+
+        /* Input field style */
+        #fishName {
+            padding: 10px;
+            font-size: 24px;
+            width: 300px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        /* Button styles using Bootstrap classes */
+        button {
+            padding: 10px 20px;
+            font-size: 24px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        /* Navigation bar style */
+        .navbar {
+            background-color: #0077cc;
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        /* Styling for result display */
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Style for the video container */
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the video in the background */
+            overflow: hidden;
+        }
+
+        /* Style for the video */
+        video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Video Container -->
+<div id="video-container">
+    <video autoplay muted loop>
+        <source src="bg.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<!-- Add Bootstrap Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="#">Fish Search</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+                        <li class="nav-item">
+                <a class="nav-link" href="#">Presentation</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div id="heading">
+        <h3>Marine Species Database(CANADA)</h3>
+    </div>
+
+    <input type="text" id="fishName" placeholder="Enter fish name">
+    <button class="btn btn-primary" onclick="searchFish()">Search</button>
+    <div id="result"></div>
+
+    <div id="header">
+        <div id="info-link">
+            <p><a class="btn btn-secondary"
+                  href="https://ccme.ca/en/res/debris-marine-en-canadian-water-quality-guidelines-for-the-protection-of-aquatic-life.pdf"
+                  target="_blank">Water Quality And Water Conservation INFO</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Add Bootstrap JS and jQuery (required for Bootstrap functionality) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function searchFish() {
+        const fishName = document.getElementById('fishName').value;
+
+        // Embedded fish data
+        const fishDatabase = {
+           'Salmon': { species: 'Salmonidae', status: 'Least Concern'   },
+    'Tuna': { species: 'Thunnini', status: 'Endangered' },
+   'Atlantic Mud-piddock': { species: 'Barnea truncata', status: 'Threatened' },
+'Atlantic Salmon': { species: 'Salmo salar', status: 'Endangered' },
+'Atlantic Walrus': { species: 'Odobenus rosmarus rosmarus', status: 'Extirpated' },
+'Atlantic Whitefish': { species: 'Coregonus huntsmani', status: 'Endangered' },
+'Atlantic Wolffish': { species: 'Anarhichas lupus', status: 'Special Concern' },
+'Banded Killifish': { species: 'Fundulus diaphanus', status: 'Special Concern' },
+'Basking Shark': { species: 'Cetorhinus maximus', status: 'Endangered' },
+'Beluga Whale': { species: 'Delphinapterus leucas', status: 'Threatened' },
+'Beluga Whale': { species: 'Delphinapterus leucas', status: 'Endangered' },
+'Bigmouth Buffalo': { species: 'Ictiobus cyprinellus', status: 'Special Concern' },
+'Black Redhorse': { species: 'Moxostoma duquesnei', status: 'Threatened' },
+'Blackstripe Topminnow': { species: 'Fundulus notatus', status: 'Special Concern' },
+'Blue Whale': { species: 'Balaenoptera musculus', status: 'Endangered' },
+'Blue Whale': { species: 'Balaenoptera musculus', status: 'Endangered' },
+'Bluntnose Sixgill Shark': { species: 'Hexanchus griseus', status: 'Special Concern' },
+'Bowhead Whale': { species: 'Balaena mysticetus', status: 'Special Concern' },
+'Bridle Shiner': { species: 'Notropis bifrenatus', status: 'Special Concern' },
+'Brook Floater': { species: 'Alasmidonta varicosa', status: 'Special Concern' },
+'Bull Trout': { species: 'Salvelinus confluentus', status: 'Threatened' },
+'Bull Trout': { species: 'Salvelinus confluentus', status: 'Special Concern' },
+'Bull Trout': { species: 'Salvelinus confluentus', status: 'Special Concern' },
+'Carmine Shiner': { species: 'Notropis percobromus', status: 'Threatened' },
+'Channel Darter': { species: 'Percina copelandi', status: 'Endangered' },
+'Channel Darter': { species: 'Percina copelandi', status: 'Endangered' },
+'Channel Darter': { species: 'Percina copelandi', status: 'Special Concern' },
+'Coastrange Sculpin': { species: 'Cottus aleuticus', status: 'Threatened' },
+'Columbia Sculpin': { species: 'Cottus hubbsi', status: 'Special Concern' },
+'Copper Redhorse': { species: 'Moxostoma hubbsi', status: 'Endangered' },
+'Cutlip Minnow': { species: 'Exoglossum maxillingua', status: 'Special Concern' },
+'Deepwater Sculpin': { species: 'Myoxocephalus thompsonii', status: 'Special Concern' },
+'Dolly Varden': { species: 'Salvelinus malma malma', status: 'Special Concern' },
+'Dwarf Wedgemussel': { species: 'Alasmidonta heterodon', status: 'Extirpated' },
+'Eastern Pondmussel': { species: 'Ligumia nasuta', status: 'Special Concern' },
+'Eastern Sand Darter': { species: 'Ammocrypta pellucida', status: 'Threatened' },
+'Eastern Sand Darter': { species: 'Ammocrypta pellucida', status: 'Threatened' },
+'Enos Lake Benthic Threespine Stickleback': { species: 'Gasterosteus aculeatus', status: 'Endangered' },
+'Enos Lake Limnetic Threespine Stickleback': { species: 'Gasterosteus aculeatus', status: 'Endangered' },
+'Fawnsfoot': { species: 'Truncilla donaciformis', status: 'Endangered' },
+'Fin Whale': { species: 'Balaenoptera physalus', status: 'Special Concern' },
+'Fin Whale': { species: 'Balaenoptera physalus', status: 'Threatened' },
+'Giant Threespine Stickleback': { species: 'Gasterosteus aculeatus', status: 'Special Concern' },
+'Grass Pickerel': { species: 'Esox americanus vermiculatus', status: 'Special Concern' },
+'Gravel Chub': { species: 'Erimystax x-punctatus', status: 'Extirpated' },
+'Green Sturgeon': { species: 'Acipenser medirostris', status: 'Special Concern' },
+'Grey Whale': { species: 'Eschrichtius robustus', status: 'Special Concern' },
+'Grey Whale': { species: 'Eschrichtius robustus', status: 'Extirpated' },
+'Harbour Porpoise': { species: 'Phocoena phocoena vomerina', status: 'Special Concern' },
+'Harbour Seal Lacs des Loups Marins subspecies': { species: 'Phoca vitulina mellonae', status: 'Endangered' },
+'Hickorynut': { species: 'Obovaria olivaria', status: 'Endangered' },
+'Hotwater Physa': { species: 'Physella wrighti', status: 'Endangered' },
+'Humpback Whale': { species: 'Megaptera novaeangliae', status: 'Special Concern' },
+'Kidneyshell': { species: 'Ptychobranchus fasciolaris', status: 'Endangered' },
+'Killer Whale': { species: 'Orcinus orca', status: 'Threatened' },
+'Killer Whale': { species: 'Orcinus orca', status: 'Threatened' },
+'Killer Whale': { species: 'Orcinus orca', status: 'Threatened' },
+'Killer Whale': { species: 'Orcinus orca', status: 'Endangered' },
+'Lake Chubsucker': { species: 'Erimyzon sucetta', status: 'Endangered' },
+'Lake Sturgeon': { species: 'Acipenser fulvescens', status: 'Special Concern' },
+'Leatherback Sea Turtle': { species: 'Dermochelys coriacea', status: 'Endangered' },
+'Leatherback Sea Turtle': { species: 'Dermochelys coriacea', status: 'Endangered' },
+'Lilliput': { species: 'Toxolasma parvum', status: 'Endangered' },
+'Loggerhead Sea Turtle': { species: 'Caretta caretta', status: 'Endangered' },
+'Longspine Thornyhead': { species: 'Sebastolobus altivelis', status: 'Special Concern' },
+'Mapleleaf': { species: 'Quadrula quadrula', status: 'Special Concern' },
+'Mapleleaf': { species: 'Quadrula quadrula', status: 'Threatened' },
+'Misty Lake Lentic Threespine Stickleback': { species: 'Gasterosteus aculeatus', status: 'Endangered' },
+'Misty Lake Lotic Threespine Stickleback': { species: 'Gasterosteus aculeatus', status: 'Endangered' },
+'Mountain Sucker': { species: 'Catostomus platyrhynchus', status: 'Special Concern' },
+'Mountain Sucker': { species: 'Catostomus platyrhynchus', status: 'Threatened' },
+'Nooksack Dace': { species: 'Rhinichthys cataractae', status: 'Endangered' },
+'North Atlantic Right Whale': { species: 'Eubalaena glacialis', status: 'Endangered' },
+'North Pacific Right Whale': { species: 'Eubalaena japonica', status: 'Endangered' },
+'Northern Abalone': { species: 'Haliotis kamtschatkana', status: 'Endangered' },
+'Northern Bottlenose Whale': { species: 'Hyperoodon ampullatus', status: 'Endangered' },
+'Northern Brook Lamprey': { species: 'Ichthyomyzon fossor', status: 'Special Concern' },
+'Northern Madtom': { species: 'Noturus stigmosus', status: 'Endangered' },
+'Northern Riffleshell': { species: 'Epioblasma torulosa', status: 'Endangered' },
+'Northern Sunfish': { species: 'Lepomis peltastes', status: 'Special Concern' },
+'Northern Wolffish': { species: 'Anarhichas denticulatus', status: 'Threatened' },
+'Olympia Oyster': { species: 'Ostrea lurida', status: 'Special Concern' },
+'Paddlefish': { species: 'Polyodon spathula', status: 'Extirpated' },
+'Paxton Lake Benthic Threespine Stickleback': { species: 'Gasterosteus aculeatus', status: 'Endangered' },
+'Paxton Lake Limnetic Threespine Stickleback': { species: 'Gasterosteus aculeatus', status: 'Endangered' },
+'Plains Minnow': { species: 'Hybognathus placitus', status: 'Threatened' },
+'Pugnose Minnow': { species: 'Opsopoeodus emiliae', status: 'Threatened' },
+'Pugnose Shiner': { species: 'Notropis anogenus', status: 'Threatened' },
+'Rainbow': { species: 'Villosa iris', status: 'Special Concern' },
+'Rainbow Smelt': { species: 'Osmerus mordax', status: 'Threatened' },
+'Rainbow Smelt': { species: 'Osmerus mordax', status: 'Threatened' },
+'Rainbow Trout': { species: 'Oncorhynchus mykiss', status: 'Endangered' },
+'Rayed Bean': { species: 'Villosa fabalis', status: 'Endangered' },
+'Redside Dace': { species: 'Clinostomus elongatus', status: 'Endangered' },
+'River Redhorse': { species: 'Moxostoma carinatum', status: 'Special Concern' },
+'Rocky Mountain Ridged Mussel': { species: 'Gonidea angulata', status: 'Special Concern' },
+'Rocky Mountain Sculpin': { species: 'Cottus sp.', status: 'Special Concern' },
+'Rocky Mountain Sculpin': { species: 'Cottus sp.', status: 'Threatened' },
+'Rougheye Rockfish type I': { species: 'Sebastes sp.', status: 'Special Concern' },
+'Rougheye Rockfish type II': { species: 'Sebastes sp.', status: 'Special Concern' },
+'Round Hickorynut': { species: 'Obovaria subrotunda', status: 'Endangered' },
+'Round Pigtoe': { species: 'Pleurobema sintoxia', status: 'Endangered' },
+'Salamander Mussel': { species: 'Simpsonaias ambigua', status: 'Endangered' },
+'Salish Sucker': { species: 'Catostomus sp. cf. catostomus', status: 'Threatened' },
+'Sea Otter': { species: 'Enhydra lutris', status: 'Special Concern' },
+'Sei Whale': { species: 'Balaenoptera borealis', status: 'Endangered' },
+'Shorthead Sculpin': { species: 'Cottus confusus', status: 'Special Concern' },
+'Shortnose Cisco': { species: 'Coregonus reighardi', status: 'Endangered' },
+'Shortnose Sturgeon': { species: 'Acipenser brevirostrum', status: 'Special Concern' },
+'Silver Chub': { species: 'Macrhybopsis storeriana', status: 'Endangered' },
+'Silver Lamprey': { species: 'Ichthyomyzon unicuspis', status: 'Special Concern' },
+'Silver Shiner': { species: 'Notropis photogenis', status: 'Threatened' },
+'Snuffbox': { species: 'Epioblasma triquetra', status: 'Endangered' },
+'Sowerby`s Beaked Whale': { species: 'Mesoplodon bidens', status: 'Special Concern' },
+'Speckled Dace': { species: 'Rhinichthys osculus', status: 'Endangered' },
+'Spotted Gar': { species: 'Lepisosteus oculatus', status: 'Endangered' },
+'Spotted Sucker': { species: 'Minytrema melanops', status: 'Special Concern' },
+'Spotted Wolffish': { species: 'Anarhichas minor', status: 'Threatened' },
+'Spring Cisco': { species: 'Coregonus sp.', status: 'Endangered' },
+'Steller Sea Lion': { species: 'Eumetopias jubatus', status: 'Special Concern' },
+'Striped Bass': { species: 'Morone saxatilis', status: 'Endangered' },
+'Threehorn Wartyback': { species: 'Obliquaria reflexa', status: 'Threatened' },
+'Tope': { species: 'Galeorhinus galeus', status: 'Special Concern' },
+'Unarmoured Threespine Stickleback': { species: 'Gasterosteus aculeatus', status: 'Special Concern' },
+'Upper Great Lakes Kiyi': { species: 'Coregonus kiyi kiyi', status: 'Special Concern' },
+'Vananda Creek Benthic Threespine Stickleback': { species: 'Gasterosteus aculeatus', status: 'Endangered' },
+'Vananda Creek Limnetic Threespine Stickleback': { species: 'Gasterosteus aculeatus', status: 'Endangered' },
+'Vancouver Lamprey': { species: 'Entosphenus macrostomus', status: 'Threatened' },
+'Warmouth': { species: 'Lepomis gulosus', status: 'Special Concern' },
+'Wavy-rayed Lampmussel': { species: 'Lampsilis fasciola', status: 'Special Concern' },
+'Western Brook Lamprey': { species: 'Lampetra richardsoni', status: 'Endangered' },
+'Western Silvery Minnow': { species: 'Hybognathus argyritis', status: 'Threatened' },
+'Westslope Cutthroat Trout': { species: 'Oncorhynchus clarkii lewisi', status: 'Special Concern' },
+'Westslope Cutthroat Trout': { species: 'Oncorhynchus clarkii lewisi', status: 'Threatened' },
+'': { species: '', status: '' },
+'White Shark': { species: 'Carcharodon carcharias', status: 'Endangered' },
+'White Sturgeon': { species: 'Acipenser transmontanus', status: 'Endangered' },
+'White Sturgeon': { species: 'Acipenser transmontanus', status: 'Endangered' },
+'White Sturgeon': { species: 'Acipenser transmontanus', status: 'Endangered' },
+'White Sturgeon': { species: 'Acipenser transmontanus', status: 'Endangered' },
+'Yellow Lampmussel': { species: 'Lampsilis cariosa', status: 'Special Concern' },
+'Yelloweye Rockfish': { species: 'Sebastes ruberrimus', status: 'Special Concern' },
+'Yelloweye Rockfish': { species: 'Sebastes ruberrimus', status: 'Special Concern' },
+
+
+        };
+
+        const fishData = fishDatabase[fishName];
+
+        if (fishData) {
+            document.getElementById('result').innerHTML = `Species: ${fishData.species}<br>Endangerment Status: ${fishData.status}`;
+        } else {
+            document.getElementById('result').innerHTML = 'Fish not found';
+        }
+    }
+</script>
+</body>
+</html>
