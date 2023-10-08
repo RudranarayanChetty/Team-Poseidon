@@ -118,6 +118,8 @@
         }
         /* Add this CSS inside the <style> tag in your HTML document */
 
+/* Add this CSS inside the <style> tag in your HTML document */
+
 @media (max-width: 767px) {
     /* Adjust body styles for mobile */
     body {
@@ -126,10 +128,16 @@
         background-attachment: fixed;
     }
 
-    /* Center the container with 90% width and add padding */
+    /* Center-align the result text */
+    #result {
+        text-align: center;
+    }
+
+    /* Make container full width on mobile */
     .container {
-        width: 90%;
-        padding: 20px;
+        width: 100%;
+        padding: 10px; /* Adjust padding for spacing */
+        margin: 0; /* Remove margin for full width */
     }
 
     /* Increase the font size for headings on mobile */
@@ -142,7 +150,7 @@
         width: 100%;
     }
 
-    /* Make buttons full-width on mobile */
+    /* Make buttons full width on mobile */
     button {
         width: 100%;
     }
@@ -174,12 +182,8 @@
     .navbar-nav .nav-link {
         font-size: 16px;
     }
-
-    /* Center-align the result text */
-    #result {
-        text-align: center;
-    }
 }
+
 
     </style>
 </head>
