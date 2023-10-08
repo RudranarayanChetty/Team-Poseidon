@@ -4,6 +4,7 @@
     <title>Fish Search</title>
     <!-- Add Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         /* Body background image */
         body {
@@ -120,24 +121,24 @@
 
 /* Add this CSS inside the <style> tag in your HTML document */
 
+
+
+/* Apply CSS within a media query for screens with a maximum width of 767px */
 @media (max-width: 767px) {
     /* Adjust body styles for mobile */
     body {
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        margin: 0; /* Remove default margin */
+        padding: 0; /* Remove default padding */
     }
 
-    /* Center-align the result text */
-    #result {
-        text-align: center;
-    }
-
-    /* Make container full width on mobile */
+    /* Make the container full width with spacing */
     .container {
         width: 100%;
-        padding: 10px; /* Adjust padding for spacing */
-        margin: 0; /* Remove margin for full width */
+        padding: 10px;
+        box-sizing: border-box; /* Include padding in width calculation */
     }
 
     /* Increase the font size for headings on mobile */
@@ -164,6 +165,7 @@
     #video-container {
         position: relative;
         height: auto;
+        display: none; /* Hide the video on mobile */
     }
 
     /* Adjust the padding and font size for the navbar on mobile */
@@ -182,8 +184,12 @@
     .navbar-nav .nav-link {
         font-size: 16px;
     }
-}
 
+    /* Center-align the result text */
+    #result {
+        text-align: center;
+    }
+}
 
     </style>
 </head>
