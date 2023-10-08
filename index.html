@@ -116,6 +116,71 @@
             width: 100%;
             height: 100%;
         }
+        /* Add this CSS inside the <style> tag in your HTML document */
+
+@media (max-width: 767px) {
+    /* Adjust body styles for mobile */
+    body {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    /* Center the container with 90% width and add padding */
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    /* Increase the font size for headings on mobile */
+    .container h3 {
+        font-size: 24px;
+    }
+
+    /* Adjust input field width for mobile */
+    #fishName {
+        width: 100%;
+    }
+
+    /* Make buttons full-width on mobile */
+    button {
+        width: 100%;
+    }
+
+    /* Adjust the margin for the Water Quality INFO link */
+    #info-link {
+        margin-top: 10px;
+    }
+
+    /* Remove fixed positioning and full-screen video on mobile */
+    #video-container {
+        position: relative;
+        height: auto;
+    }
+
+    /* Adjust the padding and font size for the navbar on mobile */
+    .navbar {
+        padding: 10px 0;
+    }
+
+    .navbar-brand {
+        font-size: 18px;
+    }
+
+    .navbar-toggler {
+        padding: 5px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 16px;
+    }
+
+    /* Center-align the result text */
+    #result {
+        text-align: center;
+    }
+}
+
     </style>
 </head>
 <body>
